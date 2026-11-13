@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maison Valmont — Calibre VM-01</title>
+    <meta
+      name="description"
+      content="An interactive 3D horological anatomy of the Maison Valmont Calibre VM-01 mechanical wristwatch."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="./assets/index-5FK1RVn4.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DumYskk-.css">
+  </head>
+  <body>
+    <div id="webgl-stage" aria-hidden="true">
+      <canvas id="watch-canvas"></canvas>
+      <div class="stage-vignette"></div>
+      <div id="click-flash" class="click-flash"></div>
+    </div>
+
+    <header class="top-bar">
+      <a href="#stage-hero" class="brand-mark" id="brand-home">
+        <span class="brand-name">Maison Valmont</span>
+        <span class="brand-calibre">Calibre VM-01</span>
+      </a>
+
+      <div class="header-controls">
+        <button
+          id="motion-toggle"
+          class="quiet-control"
+          type="button"
+          aria-pressed="false"
+          title="Toggle reduced motion"
+        >
+          <span class="control-dot" aria-hidden="true"></span>
+          <span id="motion-label">Motion: Full</span>
+        </button>
+
+        <button
+          id="sound-toggle"
+          class="quiet-control"
+          type="button"
+          aria-pressed="false"
+          aria-label="Toggle mechanical sound"
+          title="Toggle mechanical escapement sound"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path id="sound-wave-1" d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            <path id="sound-wave-2" d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+          </svg>
+          <span id="sound-label">Sound: Off</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Fixed HUD Overlay: Hero Title, Component Spec Panel, Final Lockup -->
+    <div class="hud-layer" aria-live="polite">
+      <!-- Hero Overlay -->
+      <section id="hud-hero" class="hud-hero is-visible">
+        <p class="hero-kicker">Manufacture Genève · 28,800 vph</p>
+        <h1 class="hero-title">Anatomy of<br />Mechanical Time</h1>
+        <p class="hero-subtitle">
+          Three hundred and twelve hand-finished components suspended in vertical equilibrium.
+        </p>
+        <div class="scroll-cue">
+          <span class="scroll-cue-line" aria-hidden="true"></span>
+          <span>Scroll to disassemble</span>
+        </div>
+      </section>
+
+      <!-- Component Inspection Panel (Stages 1..10) -->
+      <aside id="hud-panel" class="hud-panel" aria-hidden="true">
+        <div class="panel-meta">
+          <span id="panel-step" class="panel-step">01 / 10</span>
+          <span class="panel-rule" aria-hidden="true"></span>
+          <span id="panel-layer-tag" class="panel-tag">Exterior</span>
+        </div>
+        <h2 id="panel-name" class="panel-name">Alligator Strap</h2>
+        <p id="panel-function" class="panel-function">
+          Hand-stitched saddle leather anchored to sculpted 904L steel lugs with a folding deployant clasp.
+        </p>
+        <dl class="panel-spec">
+          <dt id="panel-spec-label">Specification</dt>
+          <dd id="panel-spec-value">20 mm Taper · Quick-Release Spring Bars</dd>
+        </dl>
+      </aside>
+
+      <!-- Final Reassembly Overlay (Stage 11) -->
+      <section id="hud-finale" class="hud-finale" aria-hidden="true">
+        <div id="lock-badge" class="lock-badge">
+          <span class="lock-dot" aria-hidden="true"></span>
+          <span id="lock-text">Reassembling Calibre</span>
+        </div>
+        <h2 class="finale-title">Zero-Tolerance<br />Harmony</h2>
+        <p class="finale-copy">
+          Every bridge, jewel, and pinion seated to 0.002 mm concentricity.
+        </p>
+        <button id="replay-btn" class="finale-btn" type="button">
+          Return to Crown
+        </button>
+      </section>
+    </div>
+
+    <!-- Progress Indicator Rail -->
+    <nav class="progress-rail" aria-label="Watch assembly stages">
+      <div class="rail-track" aria-hidden="true">
+        <div id="rail-fill" class="rail-fill"></div>
+      </div>
+      <ol id="rail-list" class="rail-list"></ol>
+      <div class="mobile-progress" aria-hidden="true">
+        <span id="mobile-stage-index">00</span>
+        <span class="mobile-divider">/</span>
+        <span id="mobile-stage-name">Overview</span>
+      </div>
+    </nav>
+
+    <!-- Scroll Trigger Document Flow -->
+    <main id="scroll-track" class="scroll-track">
+      <div id="stage-hero" class="scroll-section scroll-section--hero" data-stage="0"></div>
+      <div id="stage-1" class="scroll-section" data-stage="1"></div>
+      <div id="stage-2" class="scroll-section" data-stage="2"></div>
+      <div id="stage-3" class="scroll-section" data-stage="3"></div>
+      <div id="stage-4" class="scroll-section" data-stage="4"></div>
+      <div id="stage-5" class="scroll-section" data-stage="5"></div>
+      <div id="stage-6" class="scroll-section" data-stage="6"></div>
+      <div id="stage-7" class="scroll-section" data-stage="7"></div>
+      <div id="stage-8" class="scroll-section" data-stage="8"></div>
+      <div id="stage-9" class="scroll-section" data-stage="9"></div>
+      <div id="stage-10" class="scroll-section" data-stage="10"></div>
+      <div id="stage-11" class="scroll-section scroll-section--finale" data-stage="11"></div>
+    </main>
+
+  </body>
+</html>
